@@ -2,6 +2,7 @@ package com.example.demobase.controller;
 
 import com.example.demobase.dto.GameDTO;
 import com.example.demobase.dto.GameResponseDTO;
+import com.example.demobase.dto.GuessRequestDTO;
 import com.example.demobase.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,17 +26,17 @@ public class GameController {
     public ResponseEntity<GameResponseDTO> startGame(@PathVariable Long playerId) {
         return ResponseEntity.ok(gameService.startGame(playerId));
     }
-    
+
     @PostMapping("/guess")
     @Operation(summary = "Realizar un intento de adivinar letra")
-    public ResponseEntity<GameResponseDTO> makeGuess(@RequestBody Map<String, Object> request) {
-        Long playerId = Long.valueOf(request.get("idJugador").toString());
-        Character letra = request.get("letra").toString().charAt(0);
-        
+    public ResponseEntity<GameResponseDTO> makeGuess(@RequestBody GuessRequestDTO request) {
+        Long playerId = request.getIdJugador();
+        Character letra = request.getLetra().charAt(0);
+
         GameResponseDTO result = gameService.makeGuess(playerId, letra);
         return ResponseEntity.ok(result);
     }
-    
+
     @GetMapping
     @Operation(summary = "Obtener todas las partidas")
     public ResponseEntity<List<GameDTO>> getAllGames() {
