@@ -1,9 +1,7 @@
 package com.example.demobase.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +10,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class GameInProgress {
     
     @Id
@@ -34,5 +34,6 @@ public class GameInProgress {
     
     @Column(nullable = false)
     private LocalDateTime fechaInicio;
+
 }
 
